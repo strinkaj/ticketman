@@ -1,0 +1,33 @@
+ticketmaster:
+  email: "you@example.com"
+  # password: set env var TM_PASSWORD or use system keyring
+
+captcha:
+  provider: "2captcha"          # "2captcha" | "capsolver"
+  # api_key: set env var CAPTCHA_API_KEY
+  timeout: 120                  # max seconds to wait for solve
+
+payment:
+  card_last4: "1234"            # for selecting saved card in TM checkout
+  # full card details in env vars or keyring, never in YAML
+
+targets:
+  - url: "https://www.ticketmaster.com/event/..."
+    name: "Artist - Venue - Date"
+    on_sale: "2026-04-15T10:00:00-04:00"
+    sections: ["Floor", "Lower Bowl", "100-Level"]
+    max_price: 150
+    quantity: 2
+
+notifications:
+  desktop: true
+  sms: false
+  # twilio_sid: set env var TWILIO_SID
+  # twilio_token: set env var TWILIO_TOKEN
+  # twilio_from: set env var TWILIO_FROM
+  # phone_to: set env var TWILIO_TO
+
+browser:
+  headless: false
+  slowmo: 50
+  profile_dir: "./browser_data"
