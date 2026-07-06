@@ -1,33 +1,25 @@
+# Copy to config/config.yaml and fill in. config.yaml is gitignored.
+
 ticketmaster:
-  email: "you@example.com"
-  # password: set env var TM_PASSWORD or use system keyring
-
-captcha:
-  provider: "2captcha"          # "2captcha" | "capsolver"
-  # api_key: set env var CAPTCHA_API_KEY
-  timeout: 120                  # max seconds to wait for solve
-
-payment:
-  card_last4: "1234"            # for selecting saved card in TM checkout
-  # full card details in env vars or keyring, never in YAML
-
-targets:
-  - url: "https://www.ticketmaster.com/event/..."
-    name: "Artist - Venue - Date"
-    on_sale: "2026-04-15T10:00:00-04:00"
-    sections: ["Floor", "Lower Bowl", "100-Level"]
-    max_price: 150
-    quantity: 2
+  # Free consumer key from https://developer.ticketmaster.com.
+  # Prefer the TM_API_KEY environment variable over writing it here.
+  api_key: ""
+  country_code: "US"
 
 notifications:
   desktop: true
-  sms: false
-  # twilio_sid: set env var TWILIO_SID
-  # twilio_token: set env var TWILIO_TOKEN
-  # twilio_from: set env var TWILIO_FROM
-  # phone_to: set env var TWILIO_TO
 
-browser:
-  headless: false
-  slowmo: 50
-  profile_dir: "./browser_data"
+# Sellout-likelihood weights. Each factor is normalized to 0..1, multiplied by
+# its weight, and the weighted average is rescaled to 0..100. Weights are
+# normalized by their own sum, so they do not have to add up to 1. Tune to your
+# own experience of what sells out.
+strategy:
+  presale_density: 0.25    # more presale windows means higher expected demand
+  verified_fan: 0.25       # Verified Fan or Platinum presale present
+  price_ceiling: 0.15      # high max price hints at dynamic/platinum pricing
+  market_size: 0.15        # bigger metro clears faster
+  venue_scarcity: 0.12     # smaller room sells out faster for the same demand
+  genre: 0.08              # genre base rate
+
+# The buying group lives in config/roster.yaml, managed with:
+#   ticketman roster add "Name" --email you@example.com --access amex,verified-fan

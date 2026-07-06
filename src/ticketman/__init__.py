@@ -1,3 +1,3 @@
-"""Ticketman — Ticketmaster auto-checkout bot."""
+"""Ticketman - alerting and coordination to land retail concert tickets."""
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"

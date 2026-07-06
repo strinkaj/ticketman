@@ -4,30 +4,24 @@ build-backend = "hatchling.build"
 
 [project]
 name = "ticketman"
-version = "0.1.0"
-description = "Ticketmaster auto-checkout bot for personal use"
+version = "0.2.0"
+description = "Alerting and coordination to land retail concert tickets for your group"
 requires-python = ">=3.11"
 dependencies = [
-    "playwright>=1.49",
-    "playwright-stealth>=1.0.6",
-    "typer[all]>=0.15",
+    "typer>=0.15",
     "pydantic>=2.10",
-    "pydantic-settings>=2.7",
     "pyyaml>=6.0",
     "httpx>=0.28",
-    "twocaptcha-python>=1.3",
     "plyer>=2.1",
-    "cryptography>=44.0",
 ]
 
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0",
-    "pytest-asyncio>=0.24",
+    "pytest-cov>=5.0",
     "ruff>=0.8",
-]
-sms = [
-    "twilio>=9.0",
+    "pip-audit>=2.7",
+    "bandit>=1.8",
 ]
 
 [project.scripts]
@@ -41,5 +35,10 @@ target-version = "py311"
 select = ["E", "F", "I", "N", "W", "UP"]
 
 [tool.pytest.ini_options]
-asyncio_mode = "auto"
 testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["ticketman"]
+
+[tool.bandit]
+exclude_dirs = ["tests"]

@@ -18,14 +18,13 @@ env/
 *.swp
 *.swo
 
-# Config with secrets
+# Config with secrets, and coordination state with PII
 config/config.yaml
-
-# Browser session data
-browser_data/
-
-# Screenshots
-screenshots/
+config/roster.yaml
+config/watchlist.yaml
+config/registrations.yaml
+config/outcomes.yaml
+*.ics
 
 # Logs
 *.log
